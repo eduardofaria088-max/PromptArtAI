@@ -14,13 +14,13 @@ jobs:
           git clone https://github.com/${{ github.repository }}.git .
           git checkout main
 
-      - name: Instalar Dependencias, Java 17 e Capacitor
+      - name: Instalar Dependencias, Java 21 e Capacitor
         run: |
-          echo "Atualizando sistema e instalando Java JDK 17..."
+          echo "Atualizando sistema e instalando Java JDK 21..."
           sudo apt-get update
-          sudo apt-get install -y openjdk-17-jdk nodejs npm
+          sudo apt-get install -y openjdk-21-jdk nodejs npm
           
-          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
           export PATH=$JAVA_HOME/bin:$PATH
           java -version
 
