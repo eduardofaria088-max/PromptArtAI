@@ -12,19 +12,28 @@ jobs:
       - name: Baixar Codigo
         uses: actions/checkout@v4
 
-      - name: Instalar Node.js Direto
-        uses: actions/setup-node@v4
+      - name: Instalar Java JDK 17
+        uses: actions/setup-java@v4
         with:
-          node-version: '20'
+          distribution: 'zulu'
+          java-version: '17'
 
-      - name: Gerar APK Nativo
+      - name: Instalar Android SDK e Buildar com Gradle
         run: |
+          echo "Instalando Node e Capacitor..."
+          sudo apt-get update
+          sudo apt-get install -y nodejs npm
+          
+          node -v
           npm install -g @capacitor/cli @capacitor/core @capacitor/android
+          
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
           npx cap init "PromptArt AI" "com.promptart.app" --web-dir .
           npx cap add android
           npx cap sync android
+          
+          echo "Compilando APK..."
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
