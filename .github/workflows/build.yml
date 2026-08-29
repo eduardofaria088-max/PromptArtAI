@@ -9,35 +9,27 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Código
+      - name: Baixar Codigo
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
+      - name: Instalar Node.js Direto
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: '20'
 
-      - name: Instalar Dependências e Capacitor
+      - name: Gerar APK Nativo
         run: |
+          npm install -g @capacitor/cli @capacitor/core @capacitor/android
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
           npx cap init "PromptArt AI" "com.promptart.app" --web-dir .
           npx cap add android
           npx cap sync android
-
-      - name: Configurar Java JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Compilar APK com Gradle
-        run: |
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      - name: Disponibilizar APK para Download
+      - name: Salvar o APK
         uses: actions/upload-artifact@v4
         with:
           name: PromptArt-AI-APK
