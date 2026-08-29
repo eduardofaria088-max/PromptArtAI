@@ -24,12 +24,15 @@ jobs:
           export PATH=$JAVA_HOME/bin:$PATH
           java -version
 
-          echo "Instalando Capacitor..."
+          echo "Criando pasta web e instalando Capacitor..."
+          mkdir -p www
+          echo "<html><body><h1>PromptArt AI</h1></body></html>" > www/index.html
+
           npm install -g @capacitor/cli @capacitor/core @capacitor/android
           
           npm init -y
           npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "PromptArt AI" "com.promptart.app" --web-dir .
+          npx cap init "PromptArt AI" "com.promptart.app" --web-dir www
           npx cap add android
           npx cap sync android
           
