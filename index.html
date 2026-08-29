@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PromptArt AI 2.1</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>PromptArt <span class="ai-badge">AI 2.1</span></h1>
+    </header>
+
+    <main class="app-content">
+      <section class="card input-section">
+        <div class="label-row">
+          <label for="promptInput">Descrição da Imagem</label>
+          <span id="charCounter" class="char-counter">0 caracteres</span>
+        </div>
+        <div class="textarea-wrapper">
+          <textarea id="promptInput" placeholder="Descreva a imagem que você deseja criar..." rows="4"></textarea>
+          <button id="btnClearPrompt" class="btn-clear" title="Limpar Prompt">&times;</button>
+        </div>
+        <div class="prompt-actions">
+          <button id="btnEnhance" class="btn btn-secondary">
+            <span>✨ Melhorar Prompt</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="card settings-section">
+        <div class="setting-group">
+          <label>Proporção</label>
+          <div class="options-grid ratios">
+            <button class="chip active" data-ratio="1:1">1:1 (Quadrado)</button>
+            <button class="chip" data-ratio="16:9">16:9 (Paisagem)</button>
+            <button class="chip" data-ratio="9:16">9:16 (Retrato)</button>
+            <button class="chip" data-ratio="4:3">4:3 (Paisagem)</button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label>Qualidade</label>
+          <div class="options-grid qualities">
+            <button class="chip active" data-quality="standard">Padrão</button>
+            <button class="chip" data-quality="hd">Alta Qualidade</button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label>Quantidade</label>
+          <div class="options-grid counts">
+            <button class="chip active" data-count="1">1</button>
+            <button class="chip" data-count="2">2</button>
+            <button class="chip" data-count="3">3</button>
+            <button class="chip" data-count="4">4</button>
+          </div>
+        </div>
+      </section>
+
+      <button id="btnGenerate" class="btn btn-primary btn-generate">
+        🎨 GERAR IMAGEM
+      </button>
+
+      <div id="statusArea" class="status-area hidden">
+        <div id="loader" class="spinner"></div>
+        <p id="statusMessage">Criando sua imagem...</p>
+      </div>
+
+      <section id="resultsSection" class="results-section hidden">
+        <h2>Resultados</h2>
+        <div id="resultsGrid" class="results-grid"></div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>🖼️ Minhas Imagens</h2>
+          <button id="btnClearGallery" class="btn-danger-sm">Excluir Todas</button>
+        </div>
+        <div id="galleryGrid" class="results-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="viewerModal" class="modal hidden">
+    <span id="btnCloseModal" class="modal-close">&times;</span>
+    <img id="modalImage" class="modal-content-img" src="" alt="Imagem Ampliada">
+    <div class="modal-info">
+      <p id="modalPrompt"></p>
+      <button id="btnModalDownload" class="btn btn-primary">⬇ Baixar</button>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/download.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
