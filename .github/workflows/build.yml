@@ -9,8 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixar Codigo
-        uses: actions/checkout@v4
+      - name: Clonar Codigo via Git Nativo
+        run: |
+          git clone https://github.com/${{ github.repository }}.git .
+          git checkout main
 
       - name: Instalar Dependencias, Java 17 e Capacitor
         run: |
