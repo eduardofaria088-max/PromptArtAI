@@ -12,19 +12,17 @@ jobs:
       - name: Baixar Codigo
         uses: actions/checkout@v4
 
-      - name: Instalar Java JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
-
-      - name: Instalar Android SDK e Buildar com Gradle
+      - name: Instalar Dependencias, Java 17 e Capacitor
         run: |
-          echo "Instalando Node e Capacitor..."
+          echo "Atualizando sistema e instalando Java JDK 17..."
           sudo apt-get update
-          sudo apt-get install -y nodejs npm
+          sudo apt-get install -y openjdk-17-jdk nodejs npm
           
-          node -v
+          export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+          export PATH=$JAVA_HOME/bin:$PATH
+          java -version
+
+          echo "Instalando Capacitor..."
           npm install -g @capacitor/cli @capacitor/core @capacitor/android
           
           npm init -y
@@ -33,7 +31,7 @@ jobs:
           npx cap add android
           npx cap sync android
           
-          echo "Compilando APK..."
+          echo "Compilando APK com Gradle..."
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
